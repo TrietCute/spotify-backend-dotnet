@@ -26,13 +26,6 @@ builder.Services.AddDbContext<NeonDbContext>(options =>
     options.UseNpgsql(neonConnectionString));
 #endregion
 
-#region Phần kết nối cloudinary
-var cloudName = Env.GetString("CLOUDINARY_CLOUD_NAME");
-var apiKey = Env.GetString("CLOUDINARY_API_KEY");
-var apiSecret = Env.GetString("CLOUDINARY_API_SECRET");
-builder.Services.AddSingleton(new CloudinaryService(cloudName, apiKey, apiSecret));
-#endregion
-
 #region Phần kết nối Swagger
 // Cấu hình các dịch vụ
 builder.Services.AddSingleton<OtpService>(); // Thêm OtpService
