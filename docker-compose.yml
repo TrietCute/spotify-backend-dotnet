@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./backend_spotify
+      dockerfile: Dockerfile
+    ports:
+      - "5025:5025"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - POSTGRES_DATABASE_URL=${POSTGRES_DATABASE_URL}
+    env_file:
+      - ./backend_spotify/.env # Đảm bảo file .env chứa các biến môi trường cần thiết
+    depends_on:
+      - db
+    restart: always  # Đảm bảo ứng dụng tự khởi động lại nếu gặp lỗi
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: student_management
+      POSTGRES_USER: LeDangThuong
+      POSTGRES_PASSWORD: H9fwdtuoFG1c
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432" # Nếu cần kết nối từ bên ngoài
+
+volumes:
+  postgres_data:
