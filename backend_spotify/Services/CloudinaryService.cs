@@ -7,8 +7,14 @@ public class CloudinaryService
 
     public CloudinaryService(string cloudName, string apiKey, string apiSecret)
     {
+        if (string.IsNullOrEmpty(cloudName) || string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(apiSecret))
+        {
+            throw new ArgumentException("Cloud name, API key, and API secret must be provided.");
+        }
+
         _cloudinary = new Cloudinary(new Account(cloudName, apiKey, apiSecret));
     }
+
     public async Task<string> UploadImageAsync(Stream imageStream, string fileName)
     {
         try
@@ -29,5 +35,4 @@ public class CloudinaryService
             return string.Empty;
         }
     }
-
 }
