@@ -10,6 +10,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - POSTGRES_DATABASE_URL=${POSTGRES_DATABASE_URL}
+      - CLOUDINARY_CLOUD_NAME=dnmcjlx33
+      - CLOUDINARY_API_KEY=196255745998322
+      - CLOUDINARY_API_SECRET=N9jeah7ewJQmF3qGpZsjfRaWwYw
     env_file:
       - ./backend_spotify/.env # Đảm bảo file .env chứa các biến môi trường cần thiết
     depends_on:
@@ -23,9 +26,6 @@ services:
       POSTGRES_DB: student_management
       POSTGRES_USER: LeDangThuong
       POSTGRES_PASSWORD: H9fwdtuoFG1c
-      CLOUDINARY_CLOUD_NAME: dnmcjlx33
-      CLOUDINARY_API_KEY: 196255745998322
-      CLOUDINARY_API_SECRET: N9jeah7ewJQmF3qGpZsjfRaWwYw
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
