@@ -10,9 +10,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - POSTGRES_DATABASE_URL=${POSTGRES_DATABASE_URL}
-      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
-      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
-      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
     env_file:
       - ./backend_spotify/.env # Đảm bảo file .env chứa các biến môi trường cần thiết
     depends_on:
