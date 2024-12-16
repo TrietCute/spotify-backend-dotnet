@@ -14,9 +14,6 @@ public class NeonDbContext : DbContext
         // Cấu hình thêm nếu cần (ví dụ: ràng buộc độ dài)
         modelBuilder.Entity<User>(entity =>
         {
-            entity.Property(u => u.Username)
-                  .HasMaxLength(50)
-                  .IsRequired();
 
             entity.Property(u => u.Email)
                   .HasMaxLength(100)

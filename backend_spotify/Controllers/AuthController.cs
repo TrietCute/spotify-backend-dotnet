@@ -17,34 +17,49 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+{
+    if (request.Password != request.ConfirmPassword)
     {
-        if (request.Password != request.ConfirmPassword)
-        {
-            return BadRequest("Password and Confirm Password do not match.");
-        }
-
-        if (await _context.Users.AnyAsync(u => u.Username == request.Username || u.Email == request.Email))
-        {
-            return BadRequest("Username or email already exists.");
-        }
-
-        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
-
-        var user = new User
-        {
-            FullName = request.FullName,
-            Username = request.Username,
-            Email = request.Email,
-            Password = hashedPassword,
-        };
-
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-
-        return Ok("User registered successfully.");
+        return BadRequest("Password and Confirm Password do not match.");
     }
-    [HttpPost("")]
+
+    if (await _context.Users.AnyAsync(u => u.Email == request.Email))
+    {
+        return BadRequest("Email already exists.");
+    }
+
+    var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+    var user = new User
+    {
+        FullName = request.FullName,
+        Email = request.Email,
+        Password = hashedPassword,
+    };
+
+    _context.Users.Add(user);
+    await _context.SaveChangesAsync();
+
+    return Ok("User registered successfully.");
+}
+
+    [HttpPost("sign-in")]
+    public async Task<IActionResult> SignIn([FromBody] LoginRequest request)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        if (!BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
+        {
+            return Unauthorized("Invalid password.");
+        }
+
+        return Ok("User signed in successfully.");
+    }
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
     {
