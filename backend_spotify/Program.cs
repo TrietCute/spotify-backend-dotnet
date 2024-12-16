@@ -21,7 +21,6 @@ builder.Services.AddCors(options =>
 #region Đây là phần kết nối CSDL
 // Lấy chuỗi kết nối từ file .env
 var neonConnectionString = Env.GetString("POSTGRES_DATABASE_URL");
-var supabaseConnectionString = Env.GetString("SUPABASE_DATABASE_URL");
 // Đăng ký các DbContext
 builder.Services.AddDbContext<NeonDbContext>(options =>
     options.UseNpgsql(neonConnectionString));
@@ -31,6 +30,13 @@ builder.Services.AddDbContext<NeonDbContext>(options =>
 var cloudName = Env.GetString("CLOUDINARY_CLOUD_NAME");
 var apiKey = Env.GetString("CLOUDINARY_API_KEY");
 var apiSecret = Env.GetString("CLOUDINARY_API_SECRET");
+// Kiểm tra các giá trị có hợp lệ không
+Console.WriteLine($"Cloud Name: {cloudName}, API Key: {apiKey}, API Secret: {apiSecret}");
+
+if (string.IsNullOrEmpty(cloudName) || string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(apiSecret))
+{
+    throw new ArgumentException("Cloudinary credentials are missing. Ensure they are set in the environment variables.");
+}
 builder.Services.AddSingleton(new CloudinaryService(cloudName, apiKey, apiSecret));
 #endregion
 

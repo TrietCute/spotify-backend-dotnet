@@ -44,7 +44,7 @@ public class AuthController : ControllerBase
 
         return Ok("User registered successfully.");
     }
-
+    [HttpPost("")]
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
     {
