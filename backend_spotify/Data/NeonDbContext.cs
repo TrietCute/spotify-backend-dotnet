@@ -8,8 +8,22 @@ public class NeonDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Các cấu hình khác nếu cần
-        // Đảm bảo tên bảng là "users" với chữ thường
+        // Đảm bảo bảng được đặt tên là "users" với chữ thường
         modelBuilder.Entity<User>().ToTable("users");
+
+        // Cấu hình thêm nếu cần (ví dụ: ràng buộc độ dài)
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.Property(u => u.Username)
+                  .HasMaxLength(50)
+                  .IsRequired();
+
+            entity.Property(u => u.Email)
+                  .HasMaxLength(100)
+                  .IsRequired();
+
+            entity.Property(u => u.Password)
+                  .IsRequired();
+        });
     }
 }
