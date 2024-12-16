@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
             policy.AllowAnyOrigin()
                   .AllowAnyMethod()
                   .AllowAnyHeader()
-                  .WithOrigins("https://student-management-se100.onrender.com");
+                  .WithOrigins("https://spotify-backend-dotnet.onrender.com");
         });
 });
 
@@ -36,7 +36,20 @@ builder.Services.AddDbContext<NeonDbContext>(options =>
 // Cấu hình các dịch vụ
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c=>
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Spotify Backend Remake", // Đặt tên mới cho Swagger
+        Version = "v1",
+        Description = "This API is used for managing music data.",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Le Dang Thuong",
+            Email = "ledangthuongsp@gmail.com",
+            Url = new Uri("https://ledangthuongsp.github.io/ThuongProfile")
+        }
+    })
+);
 
 #endregion
 
@@ -57,7 +70,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) // Hiển
 }
 
 // Lắng nghe cổng 5025
-app.Urls.Add($"http://localhost:{port}");
+app.Urls.Add($"http://*:{port}");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

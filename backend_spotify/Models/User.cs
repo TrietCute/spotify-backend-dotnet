@@ -25,15 +25,4 @@ public class User
 
     public string? PersonalId { get; set; }
 
-    // Các phương thức có thể là trừu tượng hoặc triển khai sẵn
-    // public void Login();  // Phương thức trừu tượng
-    // public void Register();
-
-    // // Phương thức triển khai sẵn
-    // public void Logout()
-    // {
-    //     // Logic logout
-    // }
-
-    // public void EditProfile();
 }

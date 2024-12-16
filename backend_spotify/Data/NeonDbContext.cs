@@ -8,7 +8,6 @@ public class NeonDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
         // Các cấu hình khác nếu cần
         // Đảm bảo tên bảng là "users" với chữ thường
         modelBuilder.Entity<User>().ToTable("users");
