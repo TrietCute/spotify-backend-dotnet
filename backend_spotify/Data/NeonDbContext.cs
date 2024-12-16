@@ -1,10 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 
-public class NeonDbContext : DbContext
+public class NeonDbContext(DbContextOptions<NeonDbContext> options) : DbContext(options)
 {
-    public NeonDbContext(DbContextOptions<NeonDbContext> options) : base(options) { }
-
-    public DbSet<User> Users { get; set; }
+    public required DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

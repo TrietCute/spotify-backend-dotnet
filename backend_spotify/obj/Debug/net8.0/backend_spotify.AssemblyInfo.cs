@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend_spotify")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11b8e93b88c62698d82f0ab03e1a32d656b9b926")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3031c53c7ca8a6785ed4c82134c6546dbdacaf30")]
 [assembly: System.Reflection.AssemblyProductAttribute("backend_spotify")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend_spotify")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
